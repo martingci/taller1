@@ -1,5 +1,6 @@
 import java.util.InputMismatchException;
 import java.util.Scanner;
+import java.util.Random;
 
 public class Game {
     public static void main(String[] args) {
@@ -48,13 +49,12 @@ public class Game {
     public static void inicioJuego() {
         String [][] cards = crearMatrizCartas();
         cards = inicializarCartasJuego(cards);
-        for (int i = 0; i < cards.length; i++) {
-            System.out.println(cards[i][0]);
-            System.out.println(cards[i][1]);
-        }
+        int jugador1 = obtenerCartas(cards);
+        System.out.println(jugador1);
+
 
     }
-    public static String [][] AgregarCartas (String [][] matriz, String nombre, String valor) {
+    public static String [][] agregarCartas (String [][] matriz, String nombre, String valor) {
         for (int i = 0; i < matriz.length; i++) {
             if (matriz[i][0] == null) {
                 matriz[i][0] = nombre;
@@ -65,18 +65,28 @@ public class Game {
         return matriz;
     }
     public static String [][] inicializarCartasJuego(String [][] matriz) {
-        matriz = AgregarCartas(matriz, "As", "11");
-        matriz = AgregarCartas(matriz, "2", "2");
-        matriz = AgregarCartas(matriz, "3", "3");
-        matriz = AgregarCartas(matriz, "4", "4");
-        matriz = AgregarCartas(matriz, "5", "5");
-        matriz = AgregarCartas(matriz, "6", "6");
-        matriz = AgregarCartas(matriz, "7", "7");
-        matriz = AgregarCartas(matriz, "8", "8");
-        matriz = AgregarCartas(matriz, "9", "9");
-        matriz = AgregarCartas(matriz, "Jota", "10");
-        matriz = AgregarCartas(matriz, "Reina", "10");
-        matriz = AgregarCartas(matriz, "Rey", "10");
+        matriz = agregarCartas(matriz, "As", "11");
+        matriz = agregarCartas(matriz, "2", "2");
+        matriz = agregarCartas(matriz, "3", "3");
+        matriz = agregarCartas(matriz, "4", "4");
+        matriz = agregarCartas(matriz, "5", "5");
+        matriz = agregarCartas(matriz, "6", "6");
+        matriz = agregarCartas(matriz, "7", "7");
+        matriz = agregarCartas(matriz, "8", "8");
+        matriz = agregarCartas(matriz, "9", "9");
+        matriz = agregarCartas(matriz, "Jota", "10");
+        matriz = agregarCartas(matriz, "Reina", "10");
+        matriz = agregarCartas(matriz, "Rey", "10");
         return matriz;
+    }
+    public static int obtenerCartas (String [][] matriz) {
+        Random random = new Random();
+        int suma = 0;
+        for (int i = 0; i < 3; i++) {
+            int numeroAleatorio = random.nextInt(12);
+            System.out.println("Usted ha sacado "+matriz[numeroAleatorio][0]);
+            suma += Integer.parseInt(matriz[numeroAleatorio][1]);
+        }
+        return suma;
     }
 }
