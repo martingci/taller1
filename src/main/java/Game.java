@@ -6,6 +6,7 @@ public class Game {
     public static void main(String[] args) {
         jugarMenu();
     }
+    // Obtiene la opcion y chequea si es numero, en caso que no se repite.
     public static int userOption(String text) {
         Scanner scanner = new Scanner(System.in);
         int option = -1;
@@ -31,6 +32,7 @@ public class Game {
                 System.out.println("Cerrando programa");
         }
     }
+    // da inicio al menu de juego, en donde 1 es jugar y 0 es salir del programa
     public static void jugarMenu() {
         int opcion;
         do {
@@ -47,12 +49,18 @@ public class Game {
         return (new String [12][2]);
     }
     public static void inicioJuego() {
-        String [][] cards = crearMatrizCartas();
-        cards = inicializarCartasJuego(cards);
-        int jugador1 = obtenerCartas(cards);
-        System.out.println(jugador1);
-
-
+        String [][] cards = crearMatrizCartas(); // crea las cartas
+        cards = inicializarCartasJuego(cards); // Se le asignan los valores al mazo
+        System.out.println("Cartas para el jugador 1");
+        int jugador1 = obtenerCartas(cards); // utiliza random para obtener las cartas y las suma
+        System.out.println("La suma de sus cartas es: "+jugador1);
+        System.out.println("------------------------------");
+        System.out.println("Cartas para el jugador 2");
+        int jugador2 = obtenerCartas(cards); // utiliza random para obtener las cartas y las suma
+        System.out.println("La suma de sus cartas es: "+jugador2);
+        System.out.println("------------------------------");
+        electorGanador(jugador1, jugador2); //por medio de una serie de if se llega al ganador
+        System.out.println("---------------FIN DEL JUEGO---------------");
     }
     public static String [][] agregarCartas (String [][] matriz, String nombre, String valor) {
         for (int i = 0; i < matriz.length; i++) {
@@ -88,5 +96,28 @@ public class Game {
             suma += Integer.parseInt(matriz[numeroAleatorio][1]);
         }
         return suma;
+    }
+    public static void electorGanador(int jugador1, int jugador2) {
+        if (jugador1 > 20) {
+            if (jugador2 > 20) {
+                System.out.println("Ambos jugadores pierden");
+            } else {
+                System.out.println("El jugador 2 gana");
+            }
+        } else if (jugador1 == 20) {
+            if (jugador2 == 20) {
+                System.out.println("Jugadores empatan");
+            } else {
+                System.out.println("El jugador 1 gana");
+            }
+        } else {
+            if ((jugador1 > jugador2) && (jugador2 < 21)){
+                System.out.println("El jugador 1 gana");
+            } else if ((jugador2 > jugador1) && (jugador2 < 21)) {
+                System.out.println("El jugador 2 gana");
+            } else {
+                System.out.println("El jugador 1 gana");
+            }
+        }
     }
 }
